@@ -1,0 +1,14 @@
+*{
+    margin: 0;
+}
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(28, 28, 89);
+    height: 100px;
+    color: white;
+}
+.container{
+    border-color: blueviolet;
+}
