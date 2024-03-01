@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="container">
+        <div class="center">
+    <h1 id="h1">Weather Dashboard</h1>
+</div>
+</div>
+<div id="search">
+<h2 id="h2">Search For A City</h2>
+<input type="text" name="search" id="search-bar">
+<button id="search-button">Search</button>
+</div>
+<div id="cityButtons">
+    <button onclick="showWeather('New York')">New York</button>
+    <button onclick="showWeather('Miami')">Miami</button>
+    <button onclick="showWeather('Paris')">Paris</button>
+    <button onclick="showWeather('Houston')">Houston</button>
+    <button onclick="showWeather('Portland')">Portland</button>
+  </div>
+  <div id="weatherForecast">
+  </div>
+
+   <script src="./script.js"></script>
+</body>
+</html>
