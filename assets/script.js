@@ -21,6 +21,11 @@ fetch (url)
     fiveDay(lat, lon)
 })
 };
+
+function showWeather(city) {
+    geocode(city);
+}
+
 function currWeather (lat, lon){
 var url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apikey}&units=imperial`
 fetch (url)
@@ -50,18 +55,59 @@ fetch (url)
     container.append(wrapper)
 })
 };
-function fiveDay (lat, lon){
-var url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apikey}&units=imperial`
-fetch (url)
-.then(function(response){
-   // console.log(response)
-    return response.json()
-})
-.then(function(data){
-    console.log(data)
-    // access to 5 day forecast
-    for (var i = 0; i < 5; i++){
-        var days = [data.list[4],data.list[12],data.list[20],data.list[28],data.list[36]]
-    }
-})
-};
+function fiveDay(lat, lon) {
+    var url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apikey}&units=imperial`;
+    fetch(url)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+           // console.log(data);
+            var container = document.getElementById('container');
+
+            // Create a wrapper div for all forecast cards
+            var wrapper = document.createElement('div');
+            wrapper.style.display = 'flex';
+            wrapper.style.flexWrap = 'wrap'; 
+
+            // Loop through the forecast data
+            for (var i = 0; i < data.list.length; i++) {
+                var forecast = data.list[i];
+                var dateTime = new Date(forecast.dt * 1000); 
+
+                // Check if the time is at noon (12:00 PM) and if it's the first forecast for the day
+                if (dateTime.getUTCHours() === 12 && dateTime.getUTCMinutes() === 0 && dateTime.getUTCSeconds() === 0) {
+                    var card = document.createElement('div');
+                    card.style.border = '1px solid black';
+                    card.style.padding = '10px';
+                    card.style.minWidth = '200px'; 
+                    
+                    // puts all requirements in the cards
+                    var date = dateTime.toDateString();
+                    var temp = document.createElement('p');
+                    temp.textContent = `Temperature: ${forecast.main.temp} F`;
+
+                    var humidity = document.createElement('p');
+                    humidity.textContent = `Humidity: ${forecast.main.humidity}%`;
+
+                    var windSpeed = document.createElement('p');
+                    windSpeed.textContent = `Wind Speed: ${forecast.wind.speed} mph`;
+
+                    var icon = document.createElement('img');
+                    icon.src = `http://openweathermap.org/img/wn/${forecast.weather[0].icon}.png`;
+                    icon.alt = forecast.weather[0].description;
+
+                    // Append date temperature humidity wind speed and icon to the card
+                    card.textContent = `${date}, 12:00 PM`;
+                    card.appendChild(temp);
+                    card.appendChild(humidity);
+                    card.appendChild(windSpeed);
+                    card.appendChild(icon);
+
+                    // Append card to the wrapper
+                    wrapper.appendChild(card);
+                }
+            }
+            container.appendChild(wrapper);
+        });
+}
