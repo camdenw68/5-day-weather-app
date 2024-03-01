@@ -10,6 +10,8 @@ Use the [5 Day Weather Forecast](https://openweathermap.org/forecast5) to retrie
 
 You will use `localStorage` to store any persistent data. For more information on how to work with the OpenWeather API, refer to the [Full-Stack Blog on how to use API keys](https://coding-boot-camp.github.io/full-stack/apis/how-to-use-api-keys).
 
+A tutor session was used on this project.
+
 ## User Story
 
 ```
